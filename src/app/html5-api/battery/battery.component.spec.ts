@@ -1,3 +1,4 @@
+import { BatteryService } from './battery.service';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BatteryComponent } from './battery.component';
@@ -8,9 +9,10 @@ describe('BatteryComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BatteryComponent ]
+      declarations: [BatteryComponent],
+      providers: [BatteryService]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
