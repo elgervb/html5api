@@ -27,4 +27,4 @@ before_script:
 script:
   - yarn run lint
 # - yarn run test:ci
-#  - yarn run e2e
+# - yarn run e2e
