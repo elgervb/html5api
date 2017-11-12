@@ -25,5 +25,5 @@ before_script:
 
 script:
   - yarn run lint
-  - yarn test --browsers ChromeHeadless --code-coverage true
+  - yarn test --browsers ChromeHeadless --code-coverage true --single-run true
 #  - yarn run e2e
