@@ -9,6 +9,7 @@
     "test": "ng test",
     "test:ci": "yarn test --browsers ChromeHeadless --code-coverage true --single-run true --watch false",
     "lint": "ng lint",
+    "lint:scss": "stylelint **/**/*.scss --config stylelint.config.js",
     "e2e": "ng e2e"
   },
   "engines": {
