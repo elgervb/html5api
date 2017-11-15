@@ -2,6 +2,8 @@ evb-battery {
   position: absolute;
   top: 1rem;
   right: 1rem;
+  /* stylelint-disable declaration-no-important */
   height: 2rem !important;
   width: 4rem !important;
+  /* stylelint-enable declaration-no-important */
 }
