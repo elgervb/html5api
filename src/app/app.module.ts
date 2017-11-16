@@ -1,3 +1,4 @@
+import { SpeechModule } from './html5-api/speech/speech.module';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -15,7 +16,8 @@ import { BatteryModule } from './html5-api/battery/battery.module';
     BrowserModule,
     CommonModule,
     FormsModule,
-    BatteryModule
+    BatteryModule,
+    SpeechModule
   ],
   providers: [],
   bootstrap: [AppComponent]
