@@ -5,7 +5,7 @@ import { Injectable, Optional } from '@angular/core';
 */
 export abstract class StorageServiceSettings {
   storage: Storage = sessionStorage;
-  timeoutSecs: number = Infinity;
+  timeoutSecs = Infinity;
 }
 
 /**

@@ -14,6 +14,7 @@ export class BatteryService implements Html5Api {
   private battery: Battery;
 
   constructor() {
+    // tslint:disable-next-line no-any
     const manager = (navigator as any).getBattery();
     manager.then((battery: Battery) => {
 
