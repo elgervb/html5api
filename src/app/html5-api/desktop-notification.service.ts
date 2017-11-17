@@ -13,7 +13,7 @@ export abstract class DesktopNotificationsSettings {
 export class DesktopNotificationsService {
   private icon: string;
 
-  constructor( @Optional() private settings: DesktopNotificationsSettings) {
+  constructor( @Optional() settings: DesktopNotificationsSettings) {
     if (settings) {
       this.icon = settings.icon;
     }
