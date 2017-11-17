@@ -10,7 +10,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'app';
 
-  constructor(private speech: SpeechService, private battery: BatteryService) {
+  constructor(speech: SpeechService, battery: BatteryService) {
     if (speech.isSupported() && battery.isSupported) {
       battery.level$.subscribe(level => {
         if (level === 10) {
