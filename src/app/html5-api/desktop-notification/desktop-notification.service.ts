@@ -2,7 +2,6 @@ import { Injectable, Optional } from '@angular/core';
 
 export abstract class DesktopNotificationsSettings {
   icon: string;
-
 }
 
 /**
