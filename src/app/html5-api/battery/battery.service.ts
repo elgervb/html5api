@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs/Rx';
+import { BehaviorSubject } from 'rxjs/Rx';
 import { Html5Api } from '../html5api';
 
 @Injectable()
@@ -9,7 +9,8 @@ export class BatteryService implements Html5Api {
   level$ = new BehaviorSubject<number>(0);
   chargingTime$ = new BehaviorSubject<number>(0);
   dischargeTime$ = new BehaviorSubject<number>(0);
-  battery$ = new Subject<Battery>();
+
+  battery$ = new BehaviorSubject<Battery>(null);
 
   private battery: Battery;
 
