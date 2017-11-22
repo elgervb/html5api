@@ -1,6 +1,6 @@
-import { Component, HostBinding, Input, OnInit } from '@angular/core';
+import { Component, HostBinding, Input, OnInit, OnDestroy } from '@angular/core';
+import { Observable, Subject } from 'rxjs/Rx';
 import { BatteryService } from './battery.service';
-import { Observable } from 'rxjs/Rx';
 
 @Component({
   selector: 'evb-battery',
@@ -16,12 +16,14 @@ import { Observable } from 'rxjs/Rx';
   `,
   styleUrls: ['./battery.component.scss']
 })
-export class BatteryComponent implements OnInit {
+export class BatteryComponent implements OnInit, OnDestroy {
   @Input() horizontal = true;
   @HostBinding('class.battery--charging') charging;
 
   charging$: Observable<boolean>;
   level$: Observable<number>;
+
+  private unsubscribe = new Subject();
 
   constructor(private batteryService: BatteryService) { }
 
@@ -29,7 +31,14 @@ export class BatteryComponent implements OnInit {
     this.charging$ = this.batteryService.charging$;
     this.level$ = this.batteryService.level$;
 
-    this.charging$.subscribe(charge => this.charging = charge);
+    this.charging$
+      .takeUntil(this.unsubscribe)
+      .subscribe(charge => this.charging = charge);
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
   }
 
 }

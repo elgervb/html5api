@@ -1,29 +1,42 @@
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subject } from 'rxjs/Rx';
 import { BatteryService } from './html5-api/battery/battery.service';
 import { SpeechService } from './html5-api/speech/speech.service';
-import { Component } from '@angular/core';
 
 @Component({
   selector: 'evb-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy {
   title = 'app';
 
-  constructor(speech: SpeechService, battery: BatteryService) {
-    if (speech.isSupported() && battery.isSupported) {
-      battery.level$.subscribe(level => {
-        if (level === 10) {
-          speech.speek(`Battery is running low. Currently at ${level} percent.`);
-        }
-      });
-      battery.charging$.skip(2).subscribe(charging => {
+  private unsubscribe = new Subject();
+
+  constructor(private speech: SpeechService, private battery: BatteryService) { }
+
+  ngOnInit() {
+    if (this.speech.isSupported() && this.battery.isSupported) {
+      this.battery.level$
+        .takeUntil(this.unsubscribe)
+        .filter(level => level === 10)
+        .subscribe(level => {
+          this.speech.speek(`Battery is running low. Currently at ${level} percent.`);
+        });
+
+      this.battery.charging$.skip(2).subscribe(charging => {
         if (charging) {
-          speech.speek('Battery charging');
+          this.speech.speek('Battery charging');
         } else {
-          speech.speek('Battery no longer charging');
+          this.speech.speek('Battery no longer charging');
         }
       });
     }
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
+
   }
 }
